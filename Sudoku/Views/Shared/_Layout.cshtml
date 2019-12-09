@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body class="hold-transition sidebar-mini skin-black-dark">
+    @Html.Partial("~/Views/Shared/_Loading.cshtml")
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="#" class="logo">
+                <span class="logo-lg"><b>Sudoku</b></span>
+            </a>
+            <nav class="navbar navbar-static-top">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span class="hidden-xs">Sudoku</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <i class="glyphicon glyphicon-user" style="color:white;"></i>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="fa fa-dashboard" aria-hidden="true"></i>
+                            <span class="mainMenu">Home</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Problem")">
+                            <i class="fa fa-dashboard" aria-hidden="true"></i>
+                            <span class="mainMenu">Problems</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AddProblem" ? "active" : "")">
+                        <a href="@Url.Action("AddProblem", "Problem")">
+                            <i class="fa fa-dashboard" aria-hidden="true"></i>
+                            <span class="mainMenu">Add Problem</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </section>
+        </aside>
+
+        <div class="content-wrapper">
+            @Html.Partial("~/Views/Shared/_Acknowledgement.cshtml")
+            @RenderBody()
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
+        $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#danger-alert").slideUp(500);
+        });
+    });
+
+    $(document).on("click", ".breadcrumb li a", function () {
+        if ($(this).text() == "Home") {
+            window.location.href = '@Url.Action("Index","Home")';
+        }
+    });
+</script>

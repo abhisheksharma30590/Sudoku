@@ -1,0 +1,1389 @@
+﻿@model  Sudoku.Common.Model.SudokuModel
+@{
+    ViewBag.Title = "Solve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Sudoku.css" rel="stylesheet" />
+<section class="content-header">
+    <h1>
+        Problem
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Problem</a></li>
+        <li><a href="#">Solve</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row Bottom-Margin">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="box-footer clearfix" style="text-align:right;">
+                            <a href="@Url.Action("Index", "Problem")" tabindex="1" class="btn btn-primary"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a>
+                            <button type="button" class="btn btn-success" id="btnOtherWayRoundSolution">Show Solution</button>
+                            <button type="button" class="btn btn-danger" id="btnHide">Hide Solution</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <table id="grid">
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell0))
+                                    {<input type="text" class="row_1 col_1 box_1" id="cell-0" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_1 box_1" id="cell-0" value="@Model.Cell0" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell1))
+                                    {<input type="text" class="row_1 col_2 box_1" id="cell-1" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_2 box_1" id="cell-1" value="@Model.Cell1" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell2))
+                                    {<input type="text" class="row_1 col_3 box_1" id="cell-2" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_3 box_1" id="cell-2" value="@Model.Cell2" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell3))
+                                    {<input type="text" class="row_1 col_4 box_2" id="cell-3" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_4 box_2" id="cell-3" value="@Model.Cell3" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell4))
+                                    {<input type="text" class="row_1 col_5 box_2" id="cell-4" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_5 box_2" id="cell-4" value="@Model.Cell4" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell5))
+                                    {<input type="text" class="row_1 col_6 box_2" id="cell-5" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_6 box_2" id="cell-5" value="@Model.Cell5" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell6))
+                                    {<input type="text" class="row_1 col_7 box_3" id="cell-6" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_7 box_3" id="cell-6" value="@Model.Cell6" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell7))
+                                    {<input type="text" class="row_1 col_8 box_3" id="cell-7" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_8 box_3" id="cell-7" value="@Model.Cell7" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell8))
+                                    {<input type="text" class="row_1 col_9 box_3" id="cell-8" value="" />}
+                                    else
+                                    {<input type="text" class="row_1 col_9 box_3" id="cell-8" value="@Model.Cell8" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell9))
+                                    {<input type="text" class="row_2 col_1 box_1" id="cell-9" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_1 box_1" id="cell-9" value="@Model.Cell9" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell10))
+                                    {<input type="text" class="row_2 col_2 box_1" id="cell-10" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_2 box_1" id="cell-10" value="@Model.Cell10" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell11))
+                                    {<input type="text" class="row_2 col_3 box_1" id="cell-11" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_3 box_1" id="cell-11" value="@Model.Cell11" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell12))
+                                    {<input type="text" class="row_2 col_4 box_2" id="cell-12" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_4 box_2" id="cell-12" value="@Model.Cell12" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell13))
+                                    {<input type="text" class="row_2 col_5 box_2" id="cell-13" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_5 box_2" id="cell-13" value="@Model.Cell13" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell14))
+                                    {<input type="text" class="row_2 col_6 box_2" id="cell-14" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_6 box_2" id="cell-14" value="@Model.Cell14" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell15))
+                                    {<input type="text" class="row_2 col_7 box_3" id="cell-15" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_7 box_3" id="cell-15" value="@Model.Cell15" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell16))
+                                    {<input type="text" class="row_2 col_8 box_3" id="cell-16" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_8 box_3" id="cell-16" value="@Model.Cell16" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell17))
+                                    {<input type="text" class="row_2 col_9 box_3" id="cell-17" value="" />}
+                                    else
+                                    {<input type="text" class="row_2 col_9 box_3" id="cell-17" value="@Model.Cell17" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell18))
+                                    {<input type="text" class="row_3 col_1 box_1" id="cell-18" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_1 box_1" id="cell-18" value="@Model.Cell18" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell19))
+                                    {<input type="text" class="row_3 col_2 box_1" id="cell-19" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_2 box_1" id="cell-19" value="@Model.Cell19" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell20))
+                                    {<input type="text" class="row_3 col_3 box_1" id="cell-20" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_3 box_1" id="cell-20" value="@Model.Cell20" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell21))
+                                    {<input type="text" class="row_3 col_4 box_2" id="cell-21" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_4 box_2" id="cell-21" value="@Model.Cell21" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell22))
+                                    {<input type="text" class="row_3 col_5 box_2" id="cell-22" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_5 box_2" id="cell-22" value="@Model.Cell22" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell23))
+                                    {<input type="text" class="row_3 col_6 box_2" id="cell-23" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_6 box_2" id="cell-23" value="@Model.Cell23" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell24))
+                                    {<input type="text" class="row_3 col_7 box_3" id="cell-24" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_7 box_3" id="cell-24" value="@Model.Cell24" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell25))
+                                    {<input type="text" class="row_3 col_8 box_3" id="cell-25" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_8 box_3" id="cell-25" value="@Model.Cell25" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell26))
+                                    {<input type="text" class="row_3 col_9 box_3" id="cell-26" value="" />}
+                                    else
+                                    {<input type="text" class="row_3 col_9 box_3" id="cell-26" value="@Model.Cell26" disabled />}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell27))
+                                    {<input type="text" class="row_4 col_1 box_4" id="cell-27" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_1 box_4" id="cell-27" value="@Model.Cell27" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell28))
+                                    {<input type="text" class="row_4 col_2 box_4" id="cell-28" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_2 box_4" id="cell-28" value="@Model.Cell28" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell29))
+                                    {<input type="text" class="row_4 col_3 box_4" id="cell-29" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_3 box_4" id="cell-29" value="@Model.Cell29" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell30))
+                                    {<input type="text" class="row_4 col_4 box_5" id="cell-30" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_4 box_5" id="cell-30" value="@Model.Cell30" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell31))
+                                    {<input type="text" class="row_4 col_5 box_5" id="cell-31" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_5 box_5" id="cell-31" value="@Model.Cell31" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell32))
+                                    {<input type="text" class="row_4 col_6 box_5" id="cell-32" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_6 box_5" id="cell-32" value="@Model.Cell32" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell33))
+                                    {<input type="text" class="row_4 col_7 box_6" id="cell-33" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_7 box_6" id="cell-33" value="@Model.Cell33" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell34))
+                                    {<input type="text" class="row_4 col_8 box_6" id="cell-34" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_8 box_6" id="cell-34" value="@Model.Cell34" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell35))
+                                    {<input type="text" class="row_4 col_9 box_6" id="cell-35" value="" />}
+                                    else
+                                    {<input type="text" class="row_4 col_9 box_6" id="cell-35" value="@Model.Cell35" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell36))
+                                    {<input type="text" class="row_5 col_1 box_4" id="cell-36" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_1 box_4" id="cell-36" value="@Model.Cell36" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell37))
+                                    {<input type="text" class="row_5 col_2 box_4" id="cell-37" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_2 box_4" id="cell-37" value="@Model.Cell37" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell38))
+                                    {<input type="text" class="row_5 col_3 box_4" id="cell-38" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_3 box_4" id="cell-38" value="@Model.Cell38" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell39))
+                                    {<input type="text" class="row_5 col_4 box_5" id="cell-39" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_4 box_5" id="cell-39" value="@Model.Cell39" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell40))
+                                    {<input type="text" class="row_5 col_5 box_5" id="cell-40" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_5 box_5" id="cell-40" value="@Model.Cell40" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell41))
+                                    {<input type="text" class="row_5 col_6 box_5" id="cell-41" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_6 box_5" id="cell-41" value="@Model.Cell41" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell42))
+                                    {<input type="text" class="row_5 col_7 box_6" id="cell-42" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_7 box_6" id="cell-42" value="@Model.Cell42" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell43))
+                                    {<input type="text" class="row_5 col_8 box_6" id="cell-43" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_8 box_6" id="cell-43" value="@Model.Cell43" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell44))
+                                    {<input type="text" class="row_5 col_9 box_6" id="cell-44" value="" />}
+                                    else
+                                    {<input type="text" class="row_5 col_9 box_6" id="cell-44" value="@Model.Cell44" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell45))
+                                    {<input type="text" class="row_6 col_1 box_4" id="cell-45" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_1 box_4" id="cell-45" value="@Model.Cell45" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell46))
+                                    {<input type="text" class="row_6 col_2 box_4" id="cell-46" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_2 box_4" id="cell-46" value="@Model.Cell46" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell47))
+                                    {<input type="text" class="row_6 col_3 box_4" id="cell-47" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_3 box_4" id="cell-47" value="@Model.Cell47" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell48))
+                                    {<input type="text" class="row_6 col_4 box_5" id="cell-48" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_4 box_5" id="cell-48" value="@Model.Cell48" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell49))
+                                    {<input type="text" class="row_6 col_5 box_5" id="cell-49" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_5 box_5" id="cell-49" value="@Model.Cell49" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell50))
+                                    {<input type="text" class="row_6 col_6 box_5" id="cell-50" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_6 box_5" id="cell-50" value="@Model.Cell50" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell51))
+                                    {<input type="text" class="row_6 col_7 box_6" id="cell-51" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_7 box_6" id="cell-51" value="@Model.Cell51" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell52))
+                                    {<input type="text" class="row_6 col_8 box_6" id="cell-52" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_8 box_6" id="cell-52" value="@Model.Cell52" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell53))
+                                    {<input type="text" class="row_6 col_9 box_6" id="cell-53" value="" />}
+                                    else
+                                    {<input type="text" class="row_6 col_9 box_6" id="cell-53" value="@Model.Cell53" disabled />}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell54))
+                                    {<input type="text" class="row_7 col_1 box_7" id="cell-54" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_1 box_7" id="cell-54" value="@Model.Cell54" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell55))
+                                    {<input type="text" class="row_7 col_2 box_7" id="cell-55" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_2 box_7" id="cell-55" value="@Model.Cell55" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell56))
+                                    {<input type="text" class="row_7 col_3 box_7" id="cell-56" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_3 box_7" id="cell-56" value="@Model.Cell56" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell57))
+                                    {<input type="text" class="row_7 col_4 box_8" id="cell-57" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_4 box_8" id="cell-57" value="@Model.Cell57" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell58))
+                                    {<input type="text" class="row_7 col_5 box_8" id="cell-58" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_5 box_8" id="cell-58" value="@Model.Cell58" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell59))
+                                    {<input type="text" class="row_7 col_6 box_8" id="cell-59" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_6 box_8" id="cell-59" value="@Model.Cell59" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell60))
+                                    {<input type="text" class="row_7 col_7 box_9" id="cell-60" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_7 box_9" id="cell-60" value="@Model.Cell60" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell61))
+                                    {<input type="text" class="row_7 col_8 box_9" id="cell-61" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_8 box_9" id="cell-61" value="@Model.Cell61" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell62))
+                                    {<input type="text" class="row_7 col_9 box_9" id="cell-62" value="" />}
+                                    else
+                                    {<input type="text" class="row_7 col_9 box_9" id="cell-62" value="@Model.Cell62" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell63))
+                                    {<input type="text" class="row_8 col_1 box_7" id="cell-63" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_1 box_7" id="cell-63" value="@Model.Cell63" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell64))
+                                    {<input type="text" class="row_8 col_2 box_7" id="cell-64" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_2 box_7" id="cell-64" value="@Model.Cell64" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell65))
+                                    {<input type="text" class="row_8 col_3 box_7" id="cell-65" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_3 box_7" id="cell-65" value="@Model.Cell65" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell66))
+                                    {<input type="text" class="row_8 col_4 box_8" id="cell-66" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_4 box_8" id="cell-66" value="@Model.Cell66" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell67))
+                                    {<input type="text" class="row_8 col_5 box_8" id="cell-67" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_5 box_8" id="cell-67" value="@Model.Cell67" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell68))
+                                    {<input type="text" class="row_8 col_6 box_8" id="cell-68" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_6 box_8" id="cell-68" value="@Model.Cell68" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell69))
+                                    {<input type="text" class="row_8 col_7 box_9" id="cell-69" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_7 box_9" id="cell-69" value="@Model.Cell69" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell70))
+                                    {<input type="text" class="row_8 col_8 box_9" id="cell-70" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_8 box_9" id="cell-70" value="@Model.Cell70" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell71))
+                                    {<input type="text" class="row_8 col_9 box_9" id="cell-71" value="" />}
+                                    else
+                                    {<input type="text" class="row_8 col_9 box_9" id="cell-71" value="@Model.Cell71" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell72))
+                                    {<input type="text" class="row_9 col_1 box_7" id="cell-72" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_1 box_7" id="cell-72" value="@Model.Cell72" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell73))
+                                    {<input type="text" class="row_9 col_2 box_7" id="cell-73" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_2 box_7" id="cell-73" value="@Model.Cell73" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell74))
+                                    {<input type="text" class="row_9 col_3 box_7" id="cell-74" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_3 box_7" id="cell-74" value="@Model.Cell74" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell75))
+                                    {<input type="text" class="row_9 col_4 box_8" id="cell-75" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_4 box_8" id="cell-75" value="@Model.Cell75" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell76))
+                                    {<input type="text" class="row_9 col_5 box_8" id="cell-76" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_5 box_8" id="cell-76" value="@Model.Cell76" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell77))
+                                    {<input type="text" class="row_9 col_6 box_8" id="cell-77" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_6 box_8" id="cell-77" value="@Model.Cell77" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell78))
+                                    {<input type="text" class="row_9 col_7 box_9" id="cell-78" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_7 box_9" id="cell-78" value="@Model.Cell78" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell79))
+                                    {<input type="text" class="row_9 col_8 box_9" id="cell-79" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_8 box_9" id="cell-79" value="@Model.Cell79" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell80))
+                                    {<input type="text" class="row_9 col_9 box_9" id="cell-80" value="" />}
+                                    else
+                                    {<input type="text" class="row_9 col_9 box_9" id="cell-80" value="@Model.Cell80" disabled />}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    @*<div class="col-lg-2">
+                        <div class="row Bottom-Margin">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-success" id="btnOtherWayRoundSolution">Solution</button>
+                                        <button type="button" class="btn btn-danger" id="btnHide">Hide</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>*@
+                    <div class="col-lg-6" style="display:none;" id="solutionDiv">
+                        <table id="SolveGrid">
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell0))
+                                    {<input type="text" class="srow_1 scol_1 sbox_1" id="cell-0" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_1 sbox_1" id="cell-0" value="@Model.Cell0" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell1))
+                                    {<input type="text" class="srow_1 scol_2 sbox_1" id="cell-1" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_2 sbox_1" id="cell-1" value="@Model.Cell1" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell2))
+                                    {<input type="text" class="srow_1 scol_3 sbox_1" id="cell-2" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_3 sbox_1" id="cell-2" value="@Model.Cell2" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell3))
+                                    {<input type="text" class="srow_1 scol_4 sbox_2" id="cell-3" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_4 sbox_2" id="cell-3" value="@Model.Cell3" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell4))
+                                    {<input type="text" class="srow_1 scol_5 sbox_2" id="cell-4" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_5 sbox_2" id="cell-4" value="@Model.Cell4" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell5))
+                                    {<input type="text" class="srow_1 scol_6 sbox_2" id="cell-5" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_6 sbox_2" id="cell-5" value="@Model.Cell5" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell6))
+                                    {<input type="text" class="srow_1 scol_7 sbox_3" id="cell-6" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_7 sbox_3" id="cell-6" value="@Model.Cell6" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell7))
+                                    {<input type="text" class="srow_1 scol_8 sbox_3" id="cell-7" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_8 sbox_3" id="cell-7" value="@Model.Cell7" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell8))
+                                    {<input type="text" class="srow_1 scol_9 sbox_3" id="cell-8" value="" />}
+                                    else
+                                    {<input type="text" class="srow_1 scol_9 sbox_3" id="cell-8" value="@Model.Cell8" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell9))
+                                    {<input type="text" class="srow_2 scol_1 sbox_1" id="cell-9" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_1 sbox_1" id="cell-9" value="@Model.Cell9" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell10))
+                                    {<input type="text" class="srow_2 scol_2 sbox_1" id="cell-10" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_2 sbox_1" id="cell-10" value="@Model.Cell10" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell11))
+                                    {<input type="text" class="srow_2 scol_3 sbox_1" id="cell-11" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_3 sbox_1" id="cell-11" value="@Model.Cell11" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell12))
+                                    {<input type="text" class="srow_2 scol_4 sbox_2" id="cell-12" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_4 sbox_2" id="cell-12" value="@Model.Cell12" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell13))
+                                    {<input type="text" class="srow_2 scol_5 sbox_2" id="cell-13" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_5 sbox_2" id="cell-13" value="@Model.Cell13" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell14))
+                                    {<input type="text" class="srow_2 scol_6 sbox_2" id="cell-14" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_6 sbox_2" id="cell-14" value="@Model.Cell14" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell15))
+                                    {<input type="text" class="srow_2 scol_7 sbox_3" id="cell-15" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_7 sbox_3" id="cell-15" value="@Model.Cell15" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell16))
+                                    {<input type="text" class="srow_2 scol_8 sbox_3" id="cell-16" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_8 sbox_3" id="cell-16" value="@Model.Cell16" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell17))
+                                    {<input type="text" class="srow_2 scol_9 sbox_3" id="cell-17" value="" />}
+                                    else
+                                    {<input type="text" class="srow_2 scol_9 sbox_3" id="cell-17" value="@Model.Cell17" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell18))
+                                    {<input type="text" class="srow_3 scol_1 sbox_1" id="cell-18" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_1 sbox_1" id="cell-18" value="@Model.Cell18" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell19))
+                                    {<input type="text" class="srow_3 scol_2 sbox_1" id="cell-19" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_2 sbox_1" id="cell-19" value="@Model.Cell19" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell20))
+                                    {<input type="text" class="srow_3 scol_3 sbox_1" id="cell-20" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_3 sbox_1" id="cell-20" value="@Model.Cell20" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell21))
+                                    {<input type="text" class="srow_3 scol_4 sbox_2" id="cell-21" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_4 sbox_2" id="cell-21" value="@Model.Cell21" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell22))
+                                    {<input type="text" class="srow_3 scol_5 sbox_2" id="cell-22" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_5 sbox_2" id="cell-22" value="@Model.Cell22" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell23))
+                                    {<input type="text" class="srow_3 scol_6 sbox_2" id="cell-23" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_6 sbox_2" id="cell-23" value="@Model.Cell23" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell24))
+                                    {<input type="text" class="srow_3 scol_7 sbox_3" id="cell-24" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_7 sbox_3" id="cell-24" value="@Model.Cell24" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell25))
+                                    {<input type="text" class="srow_3 scol_8 sbox_3" id="cell-25" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_8 sbox_3" id="cell-25" value="@Model.Cell25" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell26))
+                                    {<input type="text" class="srow_3 scol_9 sbox_3" id="cell-26" value="" />}
+                                    else
+                                    {<input type="text" class="srow_3 scol_9 sbox_3" id="cell-26" value="@Model.Cell26" disabled />}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell27))
+                                    {<input type="text" class="srow_4 scol_1 sbox_4" id="cell-27" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_1 sbox_4" id="cell-27" value="@Model.Cell27" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell28))
+                                    {<input type="text" class="srow_4 scol_2 sbox_4" id="cell-28" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_2 sbox_4" id="cell-28" value="@Model.Cell28" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell29))
+                                    {<input type="text" class="srow_4 scol_3 sbox_4" id="cell-29" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_3 sbox_4" id="cell-29" value="@Model.Cell29" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell30))
+                                    {<input type="text" class="srow_4 scol_4 sbox_5" id="cell-30" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_4 sbox_5" id="cell-30" value="@Model.Cell30" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell31))
+                                    {<input type="text" class="srow_4 scol_5 sbox_5" id="cell-31" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_5 sbox_5" id="cell-31" value="@Model.Cell31" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell32))
+                                    {<input type="text" class="srow_4 scol_6 sbox_5" id="cell-32" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_6 sbox_5" id="cell-32" value="@Model.Cell32" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell33))
+                                    {<input type="text" class="srow_4 scol_7 sbox_6" id="cell-33" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_7 sbox_6" id="cell-33" value="@Model.Cell33" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell34))
+                                    {<input type="text" class="srow_4 scol_8 sbox_6" id="cell-34" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_8 sbox_6" id="cell-34" value="@Model.Cell34" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell35))
+                                    {<input type="text" class="srow_4 scol_9 sbox_6" id="cell-35" value="" />}
+                                    else
+                                    {<input type="text" class="srow_4 scol_9 sbox_6" id="cell-35" value="@Model.Cell35" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell36))
+                                    {<input type="text" class="srow_5 scol_1 sbox_4" id="cell-36" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_1 sbox_4" id="cell-36" value="@Model.Cell36" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell37))
+                                    {<input type="text" class="srow_5 scol_2 sbox_4" id="cell-37" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_2 sbox_4" id="cell-37" value="@Model.Cell37" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell38))
+                                    {<input type="text" class="srow_5 scol_3 sbox_4" id="cell-38" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_3 sbox_4" id="cell-38" value="@Model.Cell38" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell39))
+                                    {<input type="text" class="srow_5 scol_4 sbox_5" id="cell-39" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_4 sbox_5" id="cell-39" value="@Model.Cell39" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell40))
+                                    {<input type="text" class="srow_5 scol_5 sbox_5" id="cell-40" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_5 sbox_5" id="cell-40" value="@Model.Cell40" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell41))
+                                    {<input type="text" class="srow_5 scol_6 sbox_5" id="cell-41" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_6 sbox_5" id="cell-41" value="@Model.Cell41" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell42))
+                                    {<input type="text" class="srow_5 scol_7 sbox_6" id="cell-42" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_7 sbox_6" id="cell-42" value="@Model.Cell42" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell43))
+                                    {<input type="text" class="srow_5 scol_8 sbox_6" id="cell-43" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_8 sbox_6" id="cell-43" value="@Model.Cell43" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell44))
+                                    {<input type="text" class="srow_5 scol_9 sbox_6" id="cell-44" value="" />}
+                                    else
+                                    {<input type="text" class="srow_5 scol_9 sbox_6" id="cell-44" value="@Model.Cell44" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell45))
+                                    {<input type="text" class="srow_6 scol_1 sbox_4" id="cell-45" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_1 sbox_4" id="cell-45" value="@Model.Cell45" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell46))
+                                    {<input type="text" class="srow_6 scol_2 sbox_4" id="cell-46" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_2 sbox_4" id="cell-46" value="@Model.Cell46" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell47))
+                                    {<input type="text" class="srow_6 scol_3 sbox_4" id="cell-47" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_3 sbox_4" id="cell-47" value="@Model.Cell47" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell48))
+                                    {<input type="text" class="srow_6 scol_4 sbox_5" id="cell-48" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_4 sbox_5" id="cell-48" value="@Model.Cell48" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell49))
+                                    {<input type="text" class="srow_6 scol_5 sbox_5" id="cell-49" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_5 sbox_5" id="cell-49" value="@Model.Cell49" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell50))
+                                    {<input type="text" class="srow_6 scol_6 sbox_5" id="cell-50" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_6 sbox_5" id="cell-50" value="@Model.Cell50" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell51))
+                                    {<input type="text" class="srow_6 scol_7 sbox_6" id="cell-51" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_7 sbox_6" id="cell-51" value="@Model.Cell51" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell52))
+                                    {<input type="text" class="srow_6 scol_8 sbox_6" id="cell-52" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_8 sbox_6" id="cell-52" value="@Model.Cell52" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell53))
+                                    {<input type="text" class="srow_6 scol_9 sbox_6" id="cell-53" value="" />}
+                                    else
+                                    {<input type="text" class="srow_6 scol_9 sbox_6" id="cell-53" value="@Model.Cell53" disabled />}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell54))
+                                    {<input type="text" class="srow_7 scol_1 sbox_7" id="cell-54" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_1 sbox_7" id="cell-54" value="@Model.Cell54" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell55))
+                                    {<input type="text" class="srow_7 scol_2 sbox_7" id="cell-55" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_2 sbox_7" id="cell-55" value="@Model.Cell55" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell56))
+                                    {<input type="text" class="srow_7 scol_3 sbox_7" id="cell-56" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_3 sbox_7" id="cell-56" value="@Model.Cell56" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell57))
+                                    {<input type="text" class="srow_7 scol_4 sbox_8" id="cell-57" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_4 sbox_8" id="cell-57" value="@Model.Cell57" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell58))
+                                    {<input type="text" class="srow_7 scol_5 sbox_8" id="cell-58" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_5 sbox_8" id="cell-58" value="@Model.Cell58" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell59))
+                                    {<input type="text" class="srow_7 scol_6 sbox_8" id="cell-59" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_6 sbox_8" id="cell-59" value="@Model.Cell59" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell60))
+                                    {<input type="text" class="srow_7 scol_7 sbox_9" id="cell-60" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_7 sbox_9" id="cell-60" value="@Model.Cell60" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell61))
+                                    {<input type="text" class="srow_7 scol_8 sbox_9" id="cell-61" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_8 sbox_9" id="cell-61" value="@Model.Cell61" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell62))
+                                    {<input type="text" class="srow_7 scol_9 sbox_9" id="cell-62" value="" />}
+                                    else
+                                    {<input type="text" class="srow_7 scol_9 sbox_9" id="cell-62" value="@Model.Cell62" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell63))
+                                    {<input type="text" class="srow_8 scol_1 sbox_7" id="cell-63" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_1 sbox_7" id="cell-63" value="@Model.Cell63" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell64))
+                                    {<input type="text" class="srow_8 scol_2 sbox_7" id="cell-64" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_2 sbox_7" id="cell-64" value="@Model.Cell64" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell65))
+                                    {<input type="text" class="srow_8 scol_3 sbox_7" id="cell-65" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_3 sbox_7" id="cell-65" value="@Model.Cell65" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell66))
+                                    {<input type="text" class="srow_8 scol_4 sbox_8" id="cell-66" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_4 sbox_8" id="cell-66" value="@Model.Cell66" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell67))
+                                    {<input type="text" class="srow_8 scol_5 sbox_8" id="cell-67" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_5 sbox_8" id="cell-67" value="@Model.Cell67" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell68))
+                                    {<input type="text" class="srow_8 scol_6 sbox_8" id="cell-68" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_6 sbox_8" id="cell-68" value="@Model.Cell68" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell69))
+                                    {<input type="text" class="srow_8 scol_7 sbox_9" id="cell-69" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_7 sbox_9" id="cell-69" value="@Model.Cell69" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell70))
+                                    {<input type="text" class="srow_8 scol_8 sbox_9" id="cell-70" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_8 sbox_9" id="cell-70" value="@Model.Cell70" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell71))
+                                    {<input type="text" class="srow_8 scol_9 sbox_9" id="cell-71" value="" />}
+                                    else
+                                    {<input type="text" class="srow_8 scol_9 sbox_9" id="cell-71" value="@Model.Cell71" disabled />}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell72))
+                                    {<input type="text" class="srow_9 scol_1 sbox_7" id="cell-72" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_1 sbox_7" id="cell-72" value="@Model.Cell72" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell73))
+                                    {<input type="text" class="srow_9 scol_2 sbox_7" id="cell-73" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_2 sbox_7" id="cell-73" value="@Model.Cell73" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell74))
+                                    {<input type="text" class="srow_9 scol_3 sbox_7" id="cell-74" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_3 sbox_7" id="cell-74" value="@Model.Cell74" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell75))
+                                    {<input type="text" class="srow_9 scol_4 sbox_8" id="cell-75" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_4 sbox_8" id="cell-75" value="@Model.Cell75" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell76))
+                                    {<input type="text" class="srow_9 scol_5 sbox_8" id="cell-76" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_5 sbox_8" id="cell-76" value="@Model.Cell76" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell77))
+                                    {<input type="text" class="srow_9 scol_6 sbox_8" id="cell-77" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_6 sbox_8" id="cell-77" value="@Model.Cell77" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell78))
+                                    {<input type="text" class="srow_9 scol_7 sbox_9" id="cell-78" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_7 sbox_9" id="cell-78" value="@Model.Cell78" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell79))
+                                    {<input type="text" class="srow_9 scol_8 sbox_9" id="cell-79" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_8 sbox_9" id="cell-79" value="@Model.Cell79" disabled />}
+                                </td>
+                                <td>
+                                    @if (string.IsNullOrEmpty(Model.Cell80))
+                                    {<input type="text" class="srow_9 scol_9 sbox_9" id="cell-80" value="" />}
+                                    else
+                                    {<input type="text" class="srow_9 scol_9 sbox_9" id="cell-80" value="@Model.Cell80" disabled />}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts {
+    <script>
+        $("input").attr("maxlength", 1);
+        jQuery.fn.ForceNumericOnly =
+            function () {
+                return this.each(function () {
+                    $(this).keydown(function (e) {
+                        var key = e.charCode || e.keyCode || 0;
+                        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                        // home, end, period, and numpad decimal
+                        //13-enter,8-backspace,9-tab,46-delete,.-110,Dot(.)-190,35-end,36-home,37-leftarroe,38-uparrow,39-rightarrow,40-downarrow,45-insert
+                        return (
+                            key == 8 ||
+                            key == 9 ||
+                            key == 46 ||
+                            (key >= 35 && key <= 40) ||
+                            (key >= 49 && key <= 57) ||
+                            (key >= 97 && key <= 105));
+                    });
+                });
+            };
+        $("input").ForceNumericOnly();
+        $("input").on("keyup", function (e) {
+            var currElem = $(this);
+
+            var key = e.charCode || e.keyCode || 0;
+            if ((key >= 49 && key <= 57) ||
+                (key >= 97 && key <= 105)) {
+                debugger;
+                var isInCorrect = 0;
+                var selectedItemCalsses = $(this).attr("class").split(/\s+/);
+                var rowCheckClass = selectedItemCalsses[0];
+                var colCheckClass = selectedItemCalsses[1];
+                var boxCheckClass = selectedItemCalsses[2];
+                var rowElemets = $('.' + rowCheckClass);
+                var colElemets = $('.' + colCheckClass);
+                var boxElemets = $('.' + boxCheckClass);
+                $.each(rowElemets, function (index, data) {
+                    debugger;
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            debugger;
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                $.each(colElemets, function (index, data) {
+                    debugger;
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            debugger;
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                $.each(boxElemets, function (index, data) {
+                    debugger;
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            debugger;
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                if (isInCorrect == 1)
+                    return false;
+                else
+                    $(currElem).removeClass('emptyBox').removeClass('wrongBox').addClass('correctBox');
+            }
+            else {
+                if (key == 8 || key == 46) {
+                    $(currElem).removeClass('correctBox').removeClass('wrongBox').addClass('emptyBox');
+                }
+                return false;
+            }
+        });
+
+        $('#btnSolution').on("click", function () {
+
+            $('#solutionDiv').removeAttr('style');
+            var trElem = $('#SolveGrid').find('tr');
+
+            var firstRowElem = $('#SolveGrid').find('tr').find('.srow_1');
+            var possibleValues = [];
+            var firstBlankElemCalss = '';
+            $.each(firstRowElem, function (index, firstRowElemdata) {
+                if ($(firstRowElemdata).attr('disabled') == "disabled") {
+                }
+                else {
+                    firstBlankElemCalss = $(firstRowElemdata).attr("class");
+                    var firstBlankElem = $(firstRowElemdata).attr("class").split(/\s+/);
+                    var rowCheckClass = firstBlankElem[0];
+                    var colCheckClass = firstBlankElem[1];
+                    var boxCheckClass = firstBlankElem[2];
+                    var rowElemets = $('.' + rowCheckClass);
+                    var colElemets = $('.' + colCheckClass);
+                    var boxElemets = $('.' + boxCheckClass);
+                    var isInCorrect = 0;
+                    for (var j = 1; j <= 9; j++) {
+                        $.each(rowElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(firstRowElemdata).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(colElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(firstRowElemdata).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(boxElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(firstRowElemdata).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        if (isInCorrect == 1) {
+                            isInCorrect = 0;
+                        }
+                        else {
+                            possibleValues.push(j);
+                        }
+                    }
+                    return false;
+                }
+            });
+            var firstValue = 0;
+            for (firstValue = 0; firstValue < possibleValues.length; firstValue++) {
+                $.each(trElem, function (index, tr) {
+                    var tdElem = $(tr).find('td');
+                    $.each(tdElem, function (index, td) {
+                        var inputElem = $(td).find('input');
+
+                        if ($(inputElem).attr('disabled') == "disabled") {
+                        }
+                        else {
+                            var selectedItemClass = $(inputElem).attr("class");
+                            var selectedItemCalsses = $(inputElem).attr("class").split(/\s+/);
+                            if (firstBlankElemCalss == selectedItemClass) {
+                                $(inputElem).val(possibleValues[firstValue]);
+                                $(inputElem).removeClass('emptyBox').removeClass('wrongBox').addClass('correctBox');
+                                return;
+                            }
+                            var rowCheckClass = selectedItemCalsses[0];
+                            var colCheckClass = selectedItemCalsses[1];
+                            var boxCheckClass = selectedItemCalsses[2];
+                            var rowElemets = $('.' + rowCheckClass);
+                            var colElemets = $('.' + colCheckClass);
+                            var boxElemets = $('.' + boxCheckClass);
+                            var isInCorrect = 0;
+                            var i = 1;
+                            for (i = 1; i <= 9; i++) {
+                                $.each(rowElemets, function (index, data) {
+                                    if ($(data).val() == i) {
+                                        if ($(data).attr("class") == $(inputElem).attr("class")) {
+                                        }
+                                        else {
+                                            isInCorrect = 1;
+                                            $(inputElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                                        }
+                                    }
+                                });
+                                $.each(colElemets, function (index, data) {
+                                    if ($(data).val() == i) {
+                                        if ($(data).attr("class") == $(inputElem).attr("class")) {
+                                        }
+                                        else {
+                                            isInCorrect = 1;
+                                            $(inputElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                                        }
+                                    }
+                                });
+                                $.each(boxElemets, function (index, data) {
+                                    if ($(data).val() == i) {
+                                        if ($(data).attr("class") == $(inputElem).attr("class")) {
+                                        }
+                                        else {
+                                            isInCorrect = 1;
+                                            $(inputElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                                        }
+                                    }
+                                });
+                                if (isInCorrect == 1) {
+                                    isInCorrect = 0;
+                                }
+                                else {
+                                    $(inputElem).val(i);
+                                    $(inputElem).removeClass('emptyBox').removeClass('wrongBox').addClass('correctBox');
+                                    return;
+                                }
+                            }
+                        }
+                    }); //tdelem foreach end
+                }); //trelem foreach end
+                if ($('#SolveGrid').find('input').hasClass('wrongBox')) {
+                    $('#SolveGrid').find('input').removeClass('wrongBox');
+                    $('#SolveGrid').find('input').removeClass('correctBox');
+                    $('#SolveGrid').find('input').removeClass('emptyBox');
+                    var elem = $('#SolveGrid').find('input');
+                    $.each(elem, function (index, data) {
+                        if ($(data).attr('disabled') == "disabled") {
+                        }
+                        else
+                            $(data).val('');
+                    });
+                }
+                else {
+                    return false;
+                }
+            }//firstValue loop ends
+            return false;
+        });
+
+        $('#btnHide').on("click", function () {
+            $('#solutionDiv').attr('style', 'display:none;');
+            return false;
+        });
+
+        $('#btnOtherWayRoundSolution').on("click", function () {
+            $('#solutionDiv').removeAttr('style');
+            var allElem = $('#SolveGrid').find('input');
+            var singleValuesArray = [];
+            singleValuesArray = GetSingleCellValues(allElem);
+            while (singleValuesArray.length > 0) {
+                singleValuesArray = GetSingleCellValues(allElem);
+            }
+            return false;
+        });
+
+        function GetSingleCellValues(allElem) {
+            var singleValuesArray = [];
+            var possibleValues = [];
+            $.each(allElem, function (index, allElemData) {
+                if ($(allElemData).attr('disabled') == "disabled") {
+                }
+                else {
+                    var firstBlankElem = $(allElemData).attr("class").split(/\s+/);
+                    var rowCheckClass = firstBlankElem[0];
+                    var colCheckClass = firstBlankElem[1];
+                    var boxCheckClass = firstBlankElem[2];
+                    var rowElemets = $('.' + rowCheckClass);
+                    var colElemets = $('.' + colCheckClass);
+                    var boxElemets = $('.' + boxCheckClass);
+                    var isInCorrect = 0;
+                    for (var j = 1; j <= 9; j++) {
+                        $.each(rowElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(colElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(boxElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        if (isInCorrect == 1) {
+                            isInCorrect = 0;
+                        }
+                        else {
+                            possibleValues.push(j);
+                        }
+                    }
+                    if (possibleValues.length == 1) {
+                        var elem = document.getElementsByClassName($(allElemData).attr("class"));
+                        $(elem).val(possibleValues[0]);
+                        $(elem).removeClass('emptyBox').removeClass('wrongBox').addClass('correctBox');
+                        $(elem).attr("disabled", "disabled");
+                    }
+                    else {
+                        singleValuesArray.push([$(allElemData).attr("class")]);
+                    }
+                    possibleValues = [];
+                }
+            });
+            return singleValuesArray;
+        }
+    </script>
+}

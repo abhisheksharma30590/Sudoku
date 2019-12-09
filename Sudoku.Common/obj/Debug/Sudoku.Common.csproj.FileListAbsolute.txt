@@ -1,0 +1,5 @@
+D:\Projects\Sudoku\Sudoku\Sudoku.Common\bin\Debug\Sudoku.Common.dll
+D:\Projects\Sudoku\Sudoku\Sudoku.Common\bin\Debug\Sudoku.Common.pdb
+D:\Projects\Sudoku\Sudoku\Sudoku.Common\obj\Debug\Sudoku.Common.csproj.CoreCompileInputs.cache
+D:\Projects\Sudoku\Sudoku\Sudoku.Common\obj\Debug\Sudoku.Common.dll
+D:\Projects\Sudoku\Sudoku\Sudoku.Common\obj\Debug\Sudoku.Common.pdb

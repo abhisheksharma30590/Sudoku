@@ -1,0 +1,91 @@
+﻿@model List<Sudoku.Common.Model.SudokuModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Problems
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="#">Problems</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row Bottom-Margin">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="box-footer clearfix" style="text-align:right;">
+                            <a href="@Url.Action("AddProblem", "Problem")" tabindex="2" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create Problem Statement</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <table id="dtTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Problem Name</th>
+                        <th>Input</th>
+                        <th>Solve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            i = i + 1;
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.ProblemName</td>
+                                <td>@item.ProblemInput</td>
+                                <td align="center">
+                                    <a class="btn btn-success" href="@Url.Action("Solve","Problem", new { problemId = item.ProblemId })">
+                                        Solve
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">No record found</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@section scripts {
+    <script>
+        $(function () {
+            $('#dtTable').DataTable({
+                "paging": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "scrollX": true,
+                "columnDefs": [{
+                    "defaultContent": "-",
+                    "targets": "_all"
+                }]
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

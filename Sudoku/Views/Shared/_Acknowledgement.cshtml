@@ -1,0 +1,32 @@
+﻿
+@if (!string.IsNullOrEmpty(Convert.ToString(TempData[Sudoku.Common.Common.Constants.SUCCESS_MESSAGE])))
+{
+    <div class="alert alert-success" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+
+        <strong>
+            <i class="ace-icon fa fa-check"></i>
+        </strong>
+
+        @TempData[Sudoku.Common.Common.Constants.SUCCESS_MESSAGE]
+        <br />
+    </div>
+
+}
+@if (!string.IsNullOrEmpty(Convert.ToString(TempData[Sudoku.Common.Common.Constants.ERROR_MESSAGE])))
+{
+    <div class="alert alert-danger" id="danger-alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+        </strong>
+
+        @TempData[Sudoku.Common.Common.Constants.ERROR_MESSAGE]
+        <br />
+    </div>
+}

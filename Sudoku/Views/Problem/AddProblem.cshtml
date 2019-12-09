@@ -1,0 +1,330 @@
+﻿@model Sudoku.Common.Model.SudokuModel
+@{
+    ViewBag.Title = "Add Problem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Sudoku.css" rel="stylesheet" />
+<h2>Add ProblemStatement</h2>
+
+<section class="content-header">
+    <h1>
+        Problems
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Problems</a></li>
+        <li><a href="#">Add ProblemStatement</a></li>
+    </ol>
+</section>
+
+<section class="content">
+    @using (Html.BeginForm("AddProblem", "Problem", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="box box-primary">
+            <div style="text-align: right;" class="box-footer clearfix">
+                <a href="@Url.Action("Index", "Problem")" tabindex="4" class="btn btn-danger"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a>
+                <button type="submit" tabindex="3" class="btn btn-primary" id="btnSubmit"><i class="fa fa-save"></i>&nbsp;&nbsp;Save</button>
+            </div>
+            <div class="box box-body">
+                <div class="row Bottom-Margin">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="col-sm-2">Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(x => x.ProblemName, new { @class = "form-control", @tabindex = 1, @style = "text-align:left;" })
+                                @Html.ValidationMessageFor(x => x.ProblemName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row Bottom-Margin">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="col-sm-2">Problem</label>
+                            <div class="col-sm-4">
+                                <table id="grid">
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell0, new { @class = "row_1 col_1 box_1", @id = "cell-0" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell1, new { @class = "row_1 col_2 box_1", @id = "cell-1" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell2, new { @class = "row_1 col_3 box_1", @id = "cell-2" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell3, new { @class = "row_1 col_4 box_2", @id = "cell-3" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell4, new { @class = "row_1 col_5 box_2", @id = "cell-4" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell5, new { @class = "row_1 col_6 box_2", @id = "cell-5" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell6, new { @class = "row_1 col_7 box_3", @id = "cell-6" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell7, new { @class = "row_1 col_8 box_3", @id = "cell-7" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell8, new { @class = "row_1 col_9 box_3", @id = "cell-8" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell9, new { @class = "row_2 col_1 box_1", @id = "cell-9" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell10, new { @class = "row_2 col_2 box_1", @id = "cell-10" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell11, new { @class = "row_2 col_3 box_1", @id = "cell-11" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell12, new { @class = "row_2 col_4 box_2", @id = "cell-12" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell13, new { @class = "row_2 col_5 box_2", @id = "cell-13" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell14, new { @class = "row_2 col_6 box_2", @id = "cell-14" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell15, new { @class = "row_2 col_7 box_3", @id = "cell-15" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell16, new { @class = "row_2 col_8 box_3", @id = "cell-16" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell17, new { @class = "row_2 col_9 box_3", @id = "cell-17" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell18, new { @class = "row_3 col_1 box_1", @id = "cell-18" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell19, new { @class = "row_3 col_2 box_1", @id = "cell-19" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell20, new { @class = "row_3 col_3 box_1", @id = "cell-20" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell21, new { @class = "row_3 col_4 box_2", @id = "cell-21" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell22, new { @class = "row_3 col_5 box_2", @id = "cell-22" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell23, new { @class = "row_3 col_6 box_2", @id = "cell-23" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell24, new { @class = "row_3 col_7 box_3", @id = "cell-24" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell25, new { @class = "row_3 col_8 box_3", @id = "cell-25" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell26, new { @class = "row_3 col_9 box_3", @id = "cell-26" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell27, new { @class = "row_4 col_1 box_4", @id = "cell-27" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell28, new { @class = "row_4 col_2 box_4", @id = "cell-28" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell29, new { @class = "row_4 col_3 box_4", @id = "cell-29" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell30, new { @class = "row_4 col_4 box_5", @id = "cell-30" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell31, new { @class = "row_4 col_5 box_5", @id = "cell-31" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell32, new { @class = "row_4 col_6 box_5", @id = "cell-32" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell33, new { @class = "row_4 col_7 box_6", @id = "cell-33" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell34, new { @class = "row_4 col_8 box_6", @id = "cell-34" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell35, new { @class = "row_4 col_9 box_6", @id = "cell-35" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell36, new { @class = "row_5 col_1 box_4", @id = "cell-36" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell37, new { @class = "row_5 col_2 box_4", @id = "cell-37" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell38, new { @class = "row_5 col_3 box_4", @id = "cell-38" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell39, new { @class = "row_5 col_4 box_5", @id = "cell-39" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell40, new { @class = "row_5 col_5 box_5", @id = "cell-40" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell41, new { @class = "row_5 col_6 box_5", @id = "cell-41" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell42, new { @class = "row_5 col_7 box_6", @id = "cell-42" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell43, new { @class = "row_5 col_8 box_6", @id = "cell-43" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell44, new { @class = "row_5 col_9 box_6", @id = "cell-44" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell45, new { @class = "row_6 col_1 box_4", @id = "cell-45" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell46, new { @class = "row_6 col_2 box_4", @id = "cell-46" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell47, new { @class = "row_6 col_3 box_4", @id = "cell-47" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell48, new { @class = "row_6 col_4 box_5", @id = "cell-48" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell49, new { @class = "row_6 col_5 box_5", @id = "cell-49" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell50, new { @class = "row_6 col_6 box_5", @id = "cell-50" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell51, new { @class = "row_6 col_7 box_6", @id = "cell-51" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell52, new { @class = "row_6 col_8 box_6", @id = "cell-52" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell53, new { @class = "row_6 col_9 box_6", @id = "cell-53" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell54, new { @class = "row_7 col_1 box_7", @id = "cell-54" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell55, new { @class = "row_7 col_2 box_7", @id = "cell-55" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell56, new { @class = "row_7 col_3 box_7", @id = "cell-56" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell57, new { @class = "row_7 col_4 box_8", @id = "cell-57" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell58, new { @class = "row_7 col_5 box_8", @id = "cell-58" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell59, new { @class = "row_7 col_6 box_8", @id = "cell-59" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell60, new { @class = "row_7 col_7 box_9", @id = "cell-60" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell61, new { @class = "row_7 col_8 box_9", @id = "cell-61" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell62, new { @class = "row_7 col_9 box_9", @id = "cell-62" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell63, new { @class = "row_8 col_1 box_7", @id = "cell-63" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell64, new { @class = "row_8 col_2 box_7", @id = "cell-64" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell65, new { @class = "row_8 col_3 box_7", @id = "cell-65" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell66, new { @class = "row_8 col_4 box_8", @id = "cell-66" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell67, new { @class = "row_8 col_5 box_8", @id = "cell-67" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell68, new { @class = "row_8 col_6 box_8", @id = "cell-68" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell69, new { @class = "row_8 col_7 box_9", @id = "cell-69" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell70, new { @class = "row_8 col_8 box_9", @id = "cell-70" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell71, new { @class = "row_8 col_9 box_9", @id = "cell-71" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.TextBoxFor(x => x.Cell72, new { @class = "row_9 col_1 box_7", @id = "cell-72" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell73, new { @class = "row_9 col_2 box_7", @id = "cell-73" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell74, new { @class = "row_9 col_3 box_7", @id = "cell-74" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell75, new { @class = "row_9 col_4 box_8", @id = "cell-75" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell76, new { @class = "row_9 col_5 box_8", @id = "cell-76" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell77, new { @class = "row_9 col_6 box_8", @id = "cell-77" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell78, new { @class = "row_9 col_7 box_9", @id = "cell-78" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell79, new { @class = "row_9 col_8 box_9", @id = "cell-79" })</td>
+                                        <td>@Html.TextBoxFor(x => x.Cell80, new { @class = "row_9 col_9 box_9", @id = "cell-80" })</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@section scripts {
+    <script>
+        $('#grid').find('input').attr("maxlength", 1);
+        jQuery.fn.ForceNumericOnly =
+            function () {
+                return this.each(function () {
+                    $(this).keydown(function (e) {
+                        var key = e.charCode || e.keyCode || 0;
+                        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                        // home, end, period, and numpad decimal
+                        //13-enter,8-backspace,9-tab,46-delete,.-110,Dot(.)-190,35-end,36-home,37-leftarroe,38-uparrow,39-rightarrow,40-downarrow,45-insert
+                        return (
+                            key == 8 ||
+                            key == 9 ||
+                            key == 46 ||
+                            (key >= 35 && key <= 40) ||
+                            (key >= 49 && key <= 57) ||
+                            (key >= 97 && key <= 105));
+                    });
+                });
+            };
+        $('#grid').find('input').ForceNumericOnly();
+        $('#grid').find('input').on("keyup", function (e) {
+            var currElem = $(this);
+
+            var key = e.charCode || e.keyCode || 0;
+            if ((key >= 49 && key <= 57) ||
+                (key >= 97 && key <= 105)) {
+                var isInCorrect = 0;
+                var selectedItemCalsses = $(this).attr("class").split(/\s+/);
+                var rowCheckClass = selectedItemCalsses[0];
+                var colCheckClass = selectedItemCalsses[1];
+                var boxCheckClass = selectedItemCalsses[2];
+                var rowElemets = $('.' + rowCheckClass);
+                var colElemets = $('.' + colCheckClass);
+                var boxElemets = $('.' + boxCheckClass);
+                $.each(rowElemets, function (index, data) {
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                $.each(colElemets, function (index, data) {
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                $.each(boxElemets, function (index, data) {
+                    if ($(data).val() == $(currElem).val()) {
+                        if ($(data).attr("class") == $(currElem).attr("class")) {
+                        }
+                        else {
+                            isInCorrect = 1;
+                            $(currElem).removeClass('emptyBox').removeClass('correctBox').addClass('wrongBox');
+                            return false;
+                        }
+                    }
+                });
+                if (isInCorrect == 1)
+                    return false;
+                else
+                    $(currElem).removeClass('emptyBox').removeClass('wrongBox').addClass('correctBox');
+            }
+            else {
+                if (key == 8 || key == 46) {
+                    $(currElem).removeClass('correctBox').removeClass('wrongBox').addClass('emptyBox');
+                }
+                return false;
+            }
+        });
+
+        $('#btnSubmit').on("click", function () {
+            if ($('input').hasClass('wrongBox')) {
+                alert("Invalid input in sudoku!")
+                return false;
+            }
+            var count = 0;
+            var allElem = $('#grid').find('input');
+            $.each(allElem, function (index, data) {
+                if ($(data).val().length > 0) {
+                    count = count + 1;
+                }
+            });
+
+            if (count <= 10) {
+                alert("Atleast 10 inputs required for the problem");
+                return false;
+            }
+            
+            var singleValuesArray = [];
+            singleValuesArray = GetSingleCellValues(allElem);
+            if (singleValuesArray.length <= 2) {
+                alert("Multile solutions are possible for this problem kindly provide more inputs for single solution!")
+                return false;
+            }
+        });
+
+        function GetSingleCellValues(allElem) {
+            var singleValuesArray = [];
+            var possibleValues = [];
+            $.each(allElem, function (index, allElemData) {
+                if ($(allElemData).val().length > 0) {
+                }
+                else {
+                    var firstBlankElem = $(allElemData).attr("class").split(/\s+/);
+                    var rowCheckClass = firstBlankElem[0];
+                    var colCheckClass = firstBlankElem[1];
+                    var boxCheckClass = firstBlankElem[2];
+                    var rowElemets = $('.' + rowCheckClass);
+                    var colElemets = $('.' + colCheckClass);
+                    var boxElemets = $('.' + boxCheckClass);
+                    var isInCorrect = 0;
+                    for (var j = 1; j <= 9; j++) {
+                        $.each(rowElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(colElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        $.each(boxElemets, function (index, data) {
+                            if ($(data).val() == j) {
+                                if ($(data).attr("class") == $(allElemData).attr("class")) {
+                                }
+                                else {
+                                    isInCorrect = 1;
+                                }
+                            }
+                        });
+                        if (isInCorrect == 1) {
+                            isInCorrect = 0;
+                        }
+                        else {
+                            possibleValues.push(j);
+                        }
+                    }
+                    if (possibleValues.length == 1) {
+                        singleValuesArray.push([$(allElemData).attr("class")]);
+                    }
+                    possibleValues = [];
+                }
+            });
+            return singleValuesArray;
+        }
+    </script>
+}
